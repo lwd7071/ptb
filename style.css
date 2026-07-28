@@ -211,6 +211,61 @@ button:focus-visible, .option-row:focus-visible, .frame-thumb-row:focus-visible 
 .sidebar-back[hidden] { display: none; }
 .sidebar-back:disabled { opacity: 0.35; cursor: not-allowed; }
 
+/* ---------- Sidebar Footer / Author Tag ---------- */
+.sidebar-footer {
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px dashed rgba(58, 46, 57, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.author-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--cream);
+  padding: 6px 14px;
+  border-radius: 100px;
+  border: 1px solid rgba(58, 46, 57, 0.08);
+  transition: all 0.25s ease;
+  user-select: none;
+}
+
+.author-badge:hover {
+  background: var(--cream-deep);
+  border-color: rgba(232, 80, 111, 0.3);
+  transform: translateY(-1.5px);
+  box-shadow: 0 4px 12px rgba(58, 46, 57, 0.06);
+}
+
+.author-spark {
+  font-size: 13px;
+  line-height: 1;
+}
+
+.author-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.author-label {
+  font-size: 9.5px;
+  font-weight: 700;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  opacity: 0.8;
+}
+
+.author-names {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
 /* ================= STAGE ================= */
 .stage-col {
   flex: 1;
