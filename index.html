@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Photobooth</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="layout">
+
+  <!-- ===================== SIDEBAR ===================== -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="cam-badge">📸</div>
+      <h1>Photo<span class="accent">booth</span></h1>
+    </div>
+
+    <div class="film-rail" id="film-rail">
+      <div class="rail-step" data-step="mode"><span class="hole"></span><span class="rail-label">Kiểu chụp</span></div>
+      <div class="rail-step" data-step="frame"><span class="hole"></span><span class="rail-label">Chọn khung</span></div>
+      <div class="rail-step" data-step="capture"><span class="hole"></span><span class="rail-label">Chụp ảnh</span></div>
+      <div class="rail-step" data-step="preview"><span class="hole"></span><span class="rail-label">Xem lại</span></div>
+      <div class="rail-step" data-step="filter"><span class="hole"></span><span class="rail-label">Chọn màu</span></div>
+      <div class="rail-step" data-step="result"><span class="hole"></span><span class="rail-label">Hoàn tất</span></div>
+    </div>
+
+    <div class="sidebar-body">
+
+      <div class="sidebar-panel" data-step="mode">
+        <h2 class="panel-title">Chụp mấy tấm?</h2>
+        <p class="panel-sub">Chọn kiểu chụp phù hợp khoảnh khắc của bạn</p>
+        <div class="option-list">
+          <button class="option-row" data-mode="single">
+            <span class="opt-icon">🖼️</span>
+            <span class="opt-text"><strong>1 tấm</strong><small>Một khoảnh khắc, một khung ảnh lớn</small></span>
+          </button>
+          <button class="option-row" data-mode="multi">
+            <span class="opt-icon">🎞️</span>
+            <span class="opt-text"><strong>6 tấm</strong><small>Bộ sưu tập nhỏ, ghép vào 1 khung film</small></span>
+          </button>
+        </div>
+      </div>
+
+      <div class="sidebar-panel" data-step="frame">
+        <h2 class="panel-title">Chọn khung ảnh</h2>
+        <p class="panel-sub">Khung sẽ ghép sau khi bạn chụp xong</p>
+        <div class="option-list scroll" id="frame-list"></div>
+      </div>
+
+      <div class="sidebar-panel" data-step="capture">
+        <h2 class="panel-title">Tạo dáng nào!</h2>
+        <p class="panel-sub">Camera đếm ngược 10 giây rồi tự động chụp</p>
+        <div class="shot-thumbs" id="shot-thumbs"></div>
+      </div>
+
+      <div class="sidebar-panel" data-step="preview">
+        <h2 class="panel-title">Xem lại ảnh</h2>
+        <p class="panel-sub">Bấm vào từng tấm để xem to bên phải</p>
+        <div class="option-list scroll" id="preview-list"></div>
+      </div>
+
+      <div class="sidebar-panel" data-step="filter">
+        <h2 class="panel-title">Chọn tông màu</h2>
+        <p class="panel-sub">Áp dụng cho tất cả ảnh trong bộ của bạn</p>
+        <div class="option-list scroll" id="filter-list"></div>
+      </div>
+
+      <div class="sidebar-panel" data-step="result">
+        <h2 class="panel-title">Xong rồi! 🎉</h2>
+        <p class="panel-sub">Tải về hoặc in ảnh của bạn</p>
+        <div class="result-actions">
+          <button class="btn btn-secondary" id="btn-download">⬇️ Tải về (.zip)</button>
+          <button class="btn btn-primary" id="btn-print">🖨️ In ảnh</button>
+          <button class="btn btn-ghost" id="btn-restart">Chụp bộ ảnh mới</button>
+        </div>
+      </div>
+
+    </div>
+
+    <button class="btn btn-ghost sidebar-back" id="back-btn">← Quay lại</button>
+  </aside>
+
+  <!-- ===================== STAGE ===================== -->
+  <main class="stage-col">
+    <div class="viewfinder" id="viewfinder" data-active="mode">
+      <span class="bracket tl"></span><span class="bracket tr"></span>
+      <span class="bracket bl"></span><span class="bracket br"></span>
+
+      <div class="camera-layer">
+        <video id="camera-video" class="live-video" autoplay playsinline muted></video>
+        <div class="ghost-grid" id="ghost-grid"></div>
+        <img class="frame-ghost" id="frame-ghost-img" alt="" />
+        <div class="shot-counter" id="shot-counter">Tấm 1/1</div>
+        <div class="countdown-overlay" id="countdown-overlay">10</div>
+        <div class="flash-overlay" id="flash-overlay"></div>
+      </div>
+
+      <img id="stage-image" class="stage-image" alt="" />
+    </div>
+
+    <p class="stage-caption" id="stage-caption">Đang bật camera...</p>
+
+    <button class="shutter-btn" id="shutter-btn">
+      <span class="shutter-ring"></span>
+      <span class="shutter-label" id="shutter-label">Tiếp tục</span>
+    </button>
+  </main>
+
+</div>
+
+<!-- Vùng ẩn dùng riêng cho việc in -->
+<div id="print-area"><img id="print-image" alt="Print" /></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
