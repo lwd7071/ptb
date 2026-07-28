@@ -150,7 +150,7 @@ const STEP_META = {
     onShutter: () => goToStep('capture'),
   },
   capture: {
-    caption: 'Nhấn nút để camera đếm ngược 10 giây rồi chụp',
+    caption: 'Nhấn nút để camera đếm ngược 5 giây rồi chụp',
     shutterLabel: 'Bắt đầu đếm ngược',
     canProceed: () => !state.isCapturing,
     onShutter: () => runCaptureSequence(),
@@ -357,7 +357,7 @@ async function runCaptureSequence() {
   for (let i = 1; i <= state.totalShots; i++) {
     shotCounterEl.textContent = `Tấm ${i}/${state.totalShots}`;
     stageCaptionEl.textContent = i === 1 ? 'Tạo dáng đi nào!' : 'Tạo dáng tiếp nào!';
-    await countdownFrom(10);
+    await countdownFrom(5);
     await doFlashAndCapture();
     if (i < state.totalShots) {
       stageCaptionEl.textContent = 'Nghỉ giây lát, chuẩn bị tấm tiếp theo...';
