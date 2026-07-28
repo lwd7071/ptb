@@ -475,11 +475,22 @@ $('#btn-download').addEventListener('click', async () => {
   const btn = $('#btn-download');
   const originalText = btn.textContent;
   btn.disabled = true;
-  btn.textContent = 'Đang tải ảnh...';
+  btn.textContent = 'Đang nén file...';
   try {
+    const zip = new JSZip();
+    if (state.mode === 'single') {
+      zip.file('photo.jpg', dataURLToUint8(state.filteredPhotos[0]));
+      zip.file('framed.png', dataURLToUint8(state.framedResultURL));
+    } else {
+      state.filteredPhotos.forEach((url, i) => {
+        zip.file(`photo-${i + 1}.jpg`, dataURLToUint8(url));
+      });
+      zip.file('framed.png', dataURLToUint8(state.framedResultURL));
+    }
+    const blob = await zip.generateAsync({ type: 'blob' });
     const a = document.createElement('a');
-    a.href = state.framedResultURL;
-    a.download = `photobooth-${Date.now()}.png`;
+    a.href = URL.createObjectURL(blob);
+    a.download = `photobooth-${Date.now()}.zip`;
     document.body.appendChild(a);
     a.click();
     a.remove();
