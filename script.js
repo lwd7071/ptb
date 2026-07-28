@@ -1,5 +1,6 @@
 // ================= CONFIG & STATE =================
 const STEP_ORDER = ['mode', 'frame', 'capture', 'preview', 'filter', 'result'];
+const CAMERA_ZOOM = 1.15; // Phóng to 15% để tự động cắt viền đen từ máy ảnh DSLR
 
 const BACK_MAP = {
   mode: null,
@@ -94,7 +95,15 @@ function drawImageCover(ctx, img, x, y, w, h) {
   } else {
     sw = iw; sh = iw / targetRatio; sx = 0; sy = (ih - sh) / 2;
   }
-  ctx.drawImage(img, sx, sy, sw, sh, x, y, w, h);
+  
+  // Xử lý zoom cắt viền đen
+  const zoom = typeof CAMERA_ZOOM !== 'undefined' ? CAMERA_ZOOM : 1;
+  const zoomSw = sw / zoom;
+  const zoomSh = sh / zoom;
+  sx += (sw - zoomSw) / 2;
+  sy += (sh - zoomSh) / 2;
+
+  ctx.drawImage(img, sx, sy, zoomSw, zoomSh, x, y, w, h);
 }
 
 function dataURLToUint8(dataURL) {

@@ -17,6 +17,7 @@
   --radius-md: 18px;
   --radius-sm: 10px;
   --sidebar-w: 360px;
+  --camera-zoom: 1.15;
 }
 
 * { box-sizing: border-box; }
@@ -245,7 +246,7 @@ button:focus-visible, .option-row:focus-visible, .frame-thumb-row:focus-visible 
 .viewfinder[data-active="frame"] .camera-layer,
 .viewfinder[data-active="capture"] .camera-layer { display: block; }
 
-#camera-video { width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1); display: block; }
+#camera-video { width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1) scale(var(--camera-zoom, 1.15)); display: block; }
 
 .ghost-grid { position: absolute; inset: 0; display: none; padding: 18px; gap: 10px; }
 .viewfinder[data-active="mode"] .ghost-grid.show { display: grid; }
