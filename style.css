@@ -225,7 +225,7 @@ button:focus-visible, .option-row:focus-visible, .frame-thumb-row:focus-visible 
 .viewfinder {
   position: relative;
   width: 100%;
-  max-width: 900px;
+  max-width: min(1200px, 112.5vh);
   aspect-ratio: 3/2;
   background: var(--ink);
   border-radius: var(--radius-lg);
